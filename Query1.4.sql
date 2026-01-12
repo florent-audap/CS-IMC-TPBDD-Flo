@@ -1,7 +1,7 @@
 SELECT TOP 1
     birthYear,
-    COUNT(*) AS counted
+    COUNT(*) AS nbActor
 FROM dbo.tArtist
 WHERE birthYear <> 0
 GROUP BY birthYear
-ORDER BY counted DESC;
+ORDER BY nbActor DESC;
