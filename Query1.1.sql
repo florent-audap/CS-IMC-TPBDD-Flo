@@ -1,0 +1,1 @@
+SELECT birthYear FROM dbo.tArtist WHERE primaryName='Mel Gibson'
