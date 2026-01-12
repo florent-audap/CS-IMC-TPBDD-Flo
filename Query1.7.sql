@@ -1,3 +1,14 @@
-SELECT A.primaryName, COUNT(*) FROM
-(select distinct idArtist, category from dbo.tJob) as distCat 
-JOIN tArtist as A on A.idArtist=distCat.idArtist GROUP BY A.primaryName HAVING Count(*)>1
+--SELECT primaryTitle FROM dto.tFilm AS F JOIN (SELECT idFilm, max FROM dto.tJob)
+--WHERE J.category='acted in' GROUP BY F.primaryTitle 
+
+SELECT primaryTitle, COUNT(*) AS nbActor
+FROM tJob AS J JOIN tFilm AS F ON F.idFilm=J.idFilm
+WHERE category = 'acted in'
+GROUP BY primaryTitle
+HAVING COUNT(*) = (
+    SELECT TOP 1 COUNT(*)
+    FROM tJob
+    WHERE category = 'acted in'
+    GROUP BY idFilm
+    ORDER BY COUNT(*) DESC
+);
